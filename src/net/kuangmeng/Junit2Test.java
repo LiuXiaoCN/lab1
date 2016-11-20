@@ -83,5 +83,19 @@ public class Junit2Test {
 		String rslt=myMain.derivative(List,num,assign,sign);
 		assertEquals("1*y+2*x",rslt);
 	}
-
+	@Test
+	public void testDerivative6() {
+		String[] List = new String[3];
+		List[0] = "x*y";
+		List[1] = "x*x";
+		List[2] = "12";
+		int num = 3;
+		String assign = "x";
+		int[] sign = new int[3];
+		sign[0]=1;
+		sign[1]=1;
+		sign[2]=1;
+		String rslt=myMain.derivative(List,num,assign,sign);
+		assertEquals("1*y+2*x",rslt);
+	}
 }

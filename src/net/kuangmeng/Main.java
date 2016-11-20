@@ -359,11 +359,11 @@ public class Main {
 		}
 		for (int i = 0; i < index; i++) {
 			if (isNumeric(poly[i])) {
-			//	if (sign[i] == 1) {
-			//		intcom += Integer.parseInt(poly[i].trim());
-			//	} else {
+				if (sign[i] == 1) {
+					intcom += Integer.parseInt(poly[i].trim());
+				} else {
 					intcom -= Integer.parseInt(poly[i].trim());
-			//	}
+				}
 			}
 		}
 		if (intcom != 0) {
