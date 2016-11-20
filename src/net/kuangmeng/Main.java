@@ -1,4 +1,4 @@
-
+package net.kuangmeng;
 import java.util.*;
 
 public class Main {
@@ -130,7 +130,7 @@ public class Main {
 				}
 			}
 		}
-		for (int i = 1; i < t; i++) {
+		for (int i = 1; i < t; i++){
 			if (time[i] > time[0]) {
 				time[0] = time[i];
 			}
@@ -233,7 +233,12 @@ public class Main {
 		output(com);
 	}
 
-	// 求导
+	/***
+	 * @param List 多项式字符串
+	 * @param num  项数
+	 * @param assign 求导的未知数符号
+	 * @param sign 各项的符号
+	 */
 	public static void derivative(String[] List, int num, String assign, int[] sign) {
 		String[] sim = List;
 		int size = num;
