@@ -49,7 +49,8 @@ public class Main {
 				System.out.print(0);
 				System.exit(0);
 			}
-			derivative(List, num, assign, sign);
+			String result = derivative(List, num, assign, sign);
+			System.out.println(result);
 		} else {
 			// 错误命令判断
 			System.out.println("命令有误！");
@@ -234,38 +235,44 @@ public class Main {
 	}
 
 	/***
-	 * @param List 多项式字符串
+	 * @param List 多项式字符串每一项
 	 * @param num  项数
 	 * @param assign 求导的未知数符号
 	 * @param sign 各项的符号
+	 * @return result 求导后字符串
 	 */
-	public static void derivative(String[] List, int num, String assign, int[] sign) {
+	public static String derivative(String[] List, int num, String assign, int[] sign) {
 		String[] sim = List;
 		int size = num;
 		int[] items = new int[size];
-		for (int i = 0; i < size; i++) {
+		int i=0;
+		while (i < size){
 			items[i] = 0;
-			// 求出每个项的未知数个数
-			for (int j = 0; j < sim[i].length(); j++) {
-				if (sim[i].charAt(j) == assign.charAt(0)) {
+			int j = 0;
+			while(j < sim[i].length()){
+				if (sim[i].charAt(j) == assign.charAt(0)){
 					items[i]++;
 				}
+				j++;
 			}
-			if (items[i] == 0) {
+			if (items[i] == 0){
 				sim[i] = "";
 			} else {
-				for (int j = 0; j < sim[i].length(); j++) {
+				j = 0;
+				while(j < sim[i].length()) {
 					if (sim[i].charAt(j) == assign.charAt(0)) {
 						sim[i] = sim[i].substring(0, j) + String.valueOf(items[i])
 								+ sim[i].substring(j + 1, sim[i].length());
 						break;
 					}
+			//		j++;
 				}
 			}
+			i++;
 		}
-		// 求导结果
 		String com = new String();
-		for (int i = 0; i < size; i++) {
+		i = 0;
+		while(i < size) {
 			if (!sim[i].equals("")) {
 				if (sign[i] == 1) {
 					com += "+";
@@ -274,11 +281,13 @@ public class Main {
 				}
 				com += compute(sim[i]);
 			}
+			i++;
 		}
 		if (com.charAt(0) == '+') {
 			com = com.substring(1);
 		}
-		output(com);
+		String result = output(com);
+		return result;
 	}
 
 	// 乘式化简
@@ -320,7 +329,7 @@ public class Main {
 	}
 
 	// 加式化简
-	public static void output(String com) {
+	public static String output(String com) {
 		int intcom = 0;
 		String backstr = new String();
 		// 默认不超过10项
@@ -350,11 +359,11 @@ public class Main {
 		}
 		for (int i = 0; i < index; i++) {
 			if (isNumeric(poly[i])) {
-				if (sign[i] == 1) {
-					intcom += Integer.parseInt(poly[i].trim());
-				} else {
+			//	if (sign[i] == 1) {
+			//		intcom += Integer.parseInt(poly[i].trim());
+			//	} else {
 					intcom -= Integer.parseInt(poly[i].trim());
-				}
+			//	}
 			}
 		}
 		if (intcom != 0) {
@@ -370,7 +379,7 @@ public class Main {
 		if (backstr.charAt(0) == '+') {
 			backstr = backstr.substring(1);
 		}
-		System.out.println(backstr);
+		return backstr;
 	}
 
 	// 判断是否是数字
