@@ -265,7 +265,7 @@ public class Main {
 								+ sim[i].substring(j + 1, sim[i].length());
 						break;
 					}
-			//		j++;
+					j++;
 				}
 			}
 			i++;
