@@ -1,4 +1,4 @@
-
+package net.kuangmeng;
 import java.util.*;
 
 public class Main {
@@ -179,12 +179,15 @@ public class Main {
 	}
 
 	// 化简表达式
-	public static void simplify(String[] List, int num, String assign, int[] sign) {
+	public static String simplify(String[] List, int num, String assign, int[] sign) {
 		String[] sim = List;
 		int size = num;
 		String[] strArr = new String[10];
 		int index = 0;
 		int first = 1;
+		if(sim.length!=size)
+			size=sim.length;
+		
 		for (int i = 1; i < assign.length(); i++) {
 			if (' ' == assign.charAt(i)) {
 				strArr[index++] = assign.substring(first, i);
@@ -230,7 +233,7 @@ public class Main {
 			}
 			com += compute(sim[i]);
 		}
-		output(com);
+		return com;
 	}
 
 	// 求导
