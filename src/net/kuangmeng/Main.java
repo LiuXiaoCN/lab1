@@ -36,7 +36,8 @@ public class Main {
 				}
 			}
 			System.out.print("化简结果为：");
-			simplify(List, num, assign, sign);
+			String result = simplify(List, num, assign, sign);
+			System.out.println(result);
 		} else if (cmd.equals("!d/d")) {
 			// 读入求导变量
 			assign = in.next();
@@ -49,7 +50,8 @@ public class Main {
 				System.out.print(0);
 				System.exit(0);
 			}
-			derivative(List, num, assign, sign);
+			String result = derivative(List, num, assign, sign);
+			System.out.println(result);
 		} else {
 			// 错误命令判断
 			System.out.println("命令有误！");
@@ -235,35 +237,45 @@ public class Main {
 		}
 		return com;
 	}
-
-	// 求导
-	public static void derivative(String[] List, int num, String assign, int[] sign) {
+	/***
+	 * @param List 多项式字符串每一项
+	 * @param num  项数
+	 * @param assign 求导的未知数符号
+	 * @param sign 各项的符号
+	 * @return result 求导后字符串
+	 */
+	public static String derivative(String[] List, int num, String assign, int[] sign) {
 		String[] sim = List;
 		int size = num;
 		int[] items = new int[size];
-		for (int i = 0; i < size; i++) {
+		int i=0;
+		while (i < size){
 			items[i] = 0;
-			// 求出每个项的未知数个数
-			for (int j = 0; j < sim[i].length(); j++) {
-				if (sim[i].charAt(j) == assign.charAt(0)) {
+			int j = 0;
+			while(j < sim[i].length()){
+				if (sim[i].charAt(j) == assign.charAt(0)){
 					items[i]++;
 				}
+				j++;
 			}
-			if (items[i] == 0) {
+			if (items[i] == 0){
 				sim[i] = "";
 			} else {
-				for (int j = 0; j < sim[i].length(); j++) {
+				j = 0;
+				while(j < sim[i].length()) {
 					if (sim[i].charAt(j) == assign.charAt(0)) {
 						sim[i] = sim[i].substring(0, j) + String.valueOf(items[i])
 								+ sim[i].substring(j + 1, sim[i].length());
 						break;
 					}
+			//		j++;
 				}
 			}
+			i++;
 		}
-		// 求导结果
 		String com = new String();
-		for (int i = 0; i < size; i++) {
+		i = 0;
+		while(i < size) {
 			if (!sim[i].equals("")) {
 				if (sign[i] == 1) {
 					com += "+";
@@ -272,11 +284,13 @@ public class Main {
 				}
 				com += compute(sim[i]);
 			}
+			i++;
 		}
 		if (com.charAt(0) == '+') {
 			com = com.substring(1);
 		}
-		output(com);
+		String result = output(com);
+		return result;
 	}
 
 	// 乘式化简
@@ -318,59 +332,58 @@ public class Main {
 	}
 
 	// 加式化简
-	public static void output(String com) {
-		int intcom = 0;
-		String backstr = new String();
-		// 默认不超过10项
-		String[] poly = new String[10];
-		int[] sign = new int[10];
-		int first = 0;
-		int index = 0;
-		if (com.charAt(0) == '-') {
-			sign[0] = 0;
-		} else {
-			sign[0] = 1;
-		}
-		for (int i = 0; i < com.length(); i++) {
-			if ((com.charAt(i) == '+' || com.charAt(i) == '-') && i > 0) {
-				if (com.charAt(i) == '+') {
-					sign[index + 1] = 1;
-				} else {
-					sign[index + 1] = 0;
-				}
-				poly[index++] = com.substring(first, i);
-				first = i + 1;
+		public static String output(String com) {
+			int intcom = 0;
+			String backstr = new String();
+			// 默认不超过10项
+			String[] poly = new String[10];
+			int[] sign = new int[10];
+			int first = 0;
+			int index = 0;
+			if (com.charAt(0) == '-') {
+				sign[0] = 0;
+			} else {
+				sign[0] = 1;
 			}
-		}
-		poly[index++] = com.substring(first, com.length());
-		if (poly[0].charAt(0) == '-') {
-			poly[0] = poly[0].substring(1);
-		}
-		for (int i = 0; i < index; i++) {
-			if (isNumeric(poly[i])) {
-				if (sign[i] == 1) {
-					intcom += Integer.parseInt(poly[i].trim());
-				} else {
-					intcom -= Integer.parseInt(poly[i].trim());
+			for (int i = 0; i < com.length(); i++) {
+				if ((com.charAt(i) == '+' || com.charAt(i) == '-') && i > 0) {
+					if (com.charAt(i) == '+') {
+						sign[index + 1] = 1;
+					} else {
+						sign[index + 1] = 0;
+					}
+					poly[index++] = com.substring(first, i);
+					first = i + 1;
 				}
 			}
-		}
-		if (intcom != 0) {
-			backstr += String.valueOf(intcom);
-		}
-		for (int i = 0; i < index; i++) {
-			if ((poly[i].contains("*") || Character.isLetter(poly[i].charAt(0))) && sign[i] == 1) {
-				backstr += "+" + poly[i].trim();
-			} else if ((poly[i].contains("*") || Character.isLetter(poly[i].charAt(0))) && sign[i] == 0) {
-				backstr += "-" + poly[i].trim();
+			poly[index++] = com.substring(first, com.length());
+			if (poly[0].charAt(0) == '-') {
+				poly[0] = poly[0].substring(1);
 			}
+			for (int i = 0; i < index; i++) {
+				if (isNumeric(poly[i])) {
+					if (sign[i] == 1) {
+						intcom += Integer.parseInt(poly[i].trim());
+					} else {
+						intcom -= Integer.parseInt(poly[i].trim());
+					}
+				}
+			}
+			if (intcom != 0) {
+				backstr += String.valueOf(intcom);
+			}
+			for (int i = 0; i < index; i++) {
+				if ((poly[i].contains("*") || Character.isLetter(poly[i].charAt(0))) && sign[i] == 1) {
+					backstr += "+" + poly[i].trim();
+				} else if ((poly[i].contains("*") || Character.isLetter(poly[i].charAt(0))) && sign[i] == 0) {
+					backstr += "-" + poly[i].trim();
+				}
+			}
+			if (backstr.charAt(0) == '+') {
+				backstr = backstr.substring(1);
+			}
+			return backstr;
 		}
-		if (backstr.charAt(0) == '+') {
-			backstr = backstr.substring(1);
-		}
-		System.out.println(backstr);
-	}
-
 	// 判断是否是数字
 	public static boolean isNumeric(String str) {
 		str = str.trim();
