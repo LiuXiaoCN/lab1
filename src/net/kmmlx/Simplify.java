@@ -9,6 +9,9 @@ public class Simplify extends Operation {
 		public static String simplify() {
 			String[] sim = List;
 			int size = num;
+			for(int i=0;i<sim.length;i++){
+				if(sim[i].contains("&")) return "Error";
+			}
 			String[] strArr = new String[10];
 			int index = 0;
 			int first = 1;
@@ -21,6 +24,7 @@ public class Simplify extends Operation {
 					first = i + 1;
 				}
 			}
+			
 			strArr[index++] = assign.substring(first, assign.length());
 			char[] indexChar = new char[index];
 			String[] indexInt = new String[index];
