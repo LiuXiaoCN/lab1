@@ -6,6 +6,11 @@ public class IOstream {
 	public static void main(String[] args) {
 		InputPoly ip = new InputPoly();
 		String poly = ip.input();
+		ExpressionValidate ev =new ExpressionValidate();
+		if(ev.Validate(poly)==false){
+			System.out.println("表达式有误！");
+			System.exit(1);
+		}
 		// 新建字符串数组保存每一项
 		String[] List = new String[100];
 		// 整形数组保存每一项的符号
@@ -14,8 +19,10 @@ public class IOstream {
 		int num = oe.output(poly, List, sign);
 		InputAssign ia =new InputAssign();
 		String cmd = ia.input();
+		AssignValidate av = new AssignValidate();
+		int numcmd = av.Validate(cmd);
 		String assign = new String();
-		if (cmd.equals("!simplify")) {
+		if (numcmd == 1){
 		// 读入化简的var序列
 			assign = ia.inputassign();
 			if (assign.length() < 4 || !Character.isDigit(assign.charAt(assign.length() - 1))) {
@@ -32,7 +39,7 @@ public class IOstream {
 			}
 			OutputSimplify os =new OutputSimplify();
 			os.output(List, num, assign, sign);
-		} else if (cmd.equals("!d/d")) {
+		} else if (numcmd == 2) {
 			// 读入求导变量
 			assign = ia.inputassign2();
 			if (assign.length() > 1 || !Character.isLetter(assign.charAt(0))) {

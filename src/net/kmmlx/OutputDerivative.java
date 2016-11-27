@@ -7,8 +7,8 @@ public class OutputDerivative {
 			System.out.print(0);
 			System.exit(0);
 		}
-		PolyDerivative pd = new PolyDerivative(List,num,assign, sign);
-		String result = pd.poly();
+		Derivative pd = new Derivative(List,num,assign, sign);
+		String result = pd.derivative();
 		System.out.println(result);
     }
 }

@@ -62,7 +62,7 @@ public class Simplify extends Operation {
 				} else if (sign[i] == 0) {
 					com += "-";
 				}
-				MultiplicativeSimplification ms = new MultiplicativeSimplification(sim[i]);
+				MultipSimplify ms = new MultipSimplify(sim[i]);
 				com += ms.compute();
 			}
 			return com;

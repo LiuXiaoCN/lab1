@@ -1,9 +1,9 @@
 package net.kmmlx;
 
-public class SimplifyingOfAdition {
+public class AdditionSimplify {
 	 private static String com;
-	 static Judge judge = new Judge();
-	 public SimplifyingOfAdition(String com){
+	 static JudgeNum judge = new JudgeNum();
+	 public AdditionSimplify(String com){
 		 this.com = com;
 	 }
 	// 加式化简

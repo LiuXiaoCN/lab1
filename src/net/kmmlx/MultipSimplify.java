@@ -1,9 +1,9 @@
 package net.kmmlx;
 
-public class MultiplicativeSimplification {
+public class MultipSimplify {
 	 private static String str;
-	 static Judge judge = new Judge();
-	 public MultiplicativeSimplification(String str){
+	 static JudgeNum judge = new JudgeNum();
+	 public MultipSimplify(String str){
 		 this.str = str;
 	 }
 	// 乘式化简
@@ -47,6 +47,6 @@ public class MultiplicativeSimplification {
 			return str;
 		}
 		public static void setStr(String str) {
-			MultiplicativeSimplification.str = str;
+			MultipSimplify.str = str;
 		}
 }

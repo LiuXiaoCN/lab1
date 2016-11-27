@@ -1,6 +1,6 @@
 package net.kmmlx;
 
-public class Judge {
+public class JudgeNum {
 	// 判断是否是数字
 		public boolean isNumeric(String str){
 			str = str.trim();

@@ -50,7 +50,7 @@ public class Derivative extends Operation{
 				} else {
 					com += "-";
 				}
-				MultiplicativeSimplification ms =new MultiplicativeSimplification(sim[i]);
+				MultipSimplify ms =new MultipSimplify(sim[i]);
 				com += ms.compute();
 			}
 			i++;
@@ -58,7 +58,7 @@ public class Derivative extends Operation{
 		if (com.charAt(0) == '+') {
 			com = com.substring(1);
 		}
-		SimplifyingOfAdition sa = new SimplifyingOfAdition(com);
+		AdditionSimplify sa = new AdditionSimplify(com);
 		String result = sa.output();
 		return result;
 	}
