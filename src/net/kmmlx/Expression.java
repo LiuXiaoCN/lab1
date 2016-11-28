@@ -28,7 +28,7 @@ public class Expression {
 		this.List = List;
 	}
 	// 存储表达式，并输出表达式
-	public static int expresstion() {
+	public static int expresstion(){
 		// 处理空格
 		char[] chars = poly.toCharArray();
 		String result = new String();
