@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class junitforM {
+public class JunitLab6B {
 	@Test
 	public void testL1() {
 		String[] List=new String[2];

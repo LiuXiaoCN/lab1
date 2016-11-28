@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Junit2Test {
+public class JunitLab6W {
 
 	@Test
 	public void testDerivative1() {
